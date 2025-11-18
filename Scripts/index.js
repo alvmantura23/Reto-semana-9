@@ -1,10 +1,11 @@
 "use strict";
 
-// NOTA: NO ES NECESARIO COMENTAR CADA EJERCICIO , PUEDE EJECUTARLOS EN CONJUNTO
+// NOTA: NO ES NECESARIO COMENTAR CADA EJERCICIO , PUEDE EJECUTARLOS EN CONJUNTO HACIENDO USO DE LOS BOTONES IMPLEMENTADOS EN EL HTML
 
 //fuction clear()
 function limpiar(){
     document.getElementById("resultado").innerText = " ";
+    console.clear();
 }
 
 
@@ -144,18 +145,21 @@ function ejercicio_5(){
 
 //Ejericicio 6
 function solicitar(){ //solicita por un cuadro de dialogo, prompt
-    let numero;
-    numero = Number(prompt("Ingrese un valor (1-50) para participar en la Loteria!!"));
-    return numero;
+    let value;
+    value = prompt("Ingrese el valor u opción elegída: ");
+    return value;
 }
 function verificador(value, estado){
     let number;
     do{
-        number = solicitar();
-        if(number<1 || number>50){
+        alert("Preparece a ingresar un numero (1-50) para participar en la Lotería!");
+        number = Number(solicitar());
+        if(number<1 || number>50 || number===null){
             alert(`El numero ${number} no esta en el rango indicado!`);
             estado  = true;
-        }else{
+        }
+        else{
+            alert(`Número ${number} registrado`)
             estado = false;
             value = number;
             return value;//considerar esto si no esta definido
@@ -177,7 +181,6 @@ function jugando(value1, value2){
         }, i * 200); // cada *200ms se muestra un valor
     }
 }
-
 let value1, value2, estado;
 function ejercicio_6(){
     do{
@@ -185,5 +188,245 @@ function ejercicio_6(){
         value2 = verificador(value2, estado);
     }while(estado);
     document.getElementById("resultado").innerText = "Entra a la consola! \n Press F12 to open the console";
-    jugando(value1, value2)
+    jugando(value1, value2);
+}
+
+
+//EJERCICIO 7
+function isMultiplo(n){
+    if((n%15) === 0)
+        return "FizzBuzz"//Truco: Empezamos de 15 porque va a ir verificando primero si es divisible por 15 pasara a verificar si es de 3 y luego de 5 para evitar que primero verifique que es multiplo de 3 y muestre Fizz o si es de 5 muestre Buzz
+    if((n%3) === 0)
+        return "Fizz";
+    if((n%5) === 0)
+        return "Buzz";
+    else
+        return n;
+}
+function iterator(limitInf, limitSup){
+    do{
+        console.log(isMultiplo(limitInf)); //cada 1000 milisegundos
+        limitInf++;
+    }while(limitInf<=limitSup);
+}
+const limitInf = 1, limitSup= 100;
+function ejercicio_7(){
+    iterator(limitInf, limitSup);
+}
+
+
+//EJERCICIO 8
+function ejercicio_8(){
+alert("Preparece a ingresar una calificacion entre 1 y 10")
+const calificacionStr = solicitar();
+const calificacion = Number(calificacionStr);
+let mensaje = "";
+
+// 1. Comprobar que esté en el rango
+    if (isNaN(calificacion) || calificacion < 1 || calificacion > 10) {
+        mensaje = `Error: La calificación ${calificacionStr} debe ser un número entre 1 y 10.`;
+    }
+    // 2. Comprobar la categoría
+    else if (calificacion < 6) {
+        mensaje = `Calificación: ${calificacion}. Resultado: Reprobado.`;
+    } else if (calificacion >= 6 && calificacion <= 8) {
+        mensaje = `Calificación: ${calificacion}. Resultado: Regular.`;
+    } else if (calificacion === 9) {
+    mensaje = `Calificación: ${calificacion}. Resultado: Bien.`;
+    } else if (calificacion === 10) {
+        mensaje = `Calificación: ${calificacion}. Resultado: Excelente.`;
+    }
+
+    document.getElementById("resultado").innerText = mensaje;
+}
+//EJERCICIO 9
+function ejercicio_9(){
+const diametroStr = solicitar("Ingrese el diámetro de una rueda (en metros):");
+const grosorStr = solicitar("Ingrese el grosor de la rueda (en metros):");
+
+const diametro = Number(diametroStr);
+const grosor = Number(grosorStr);
+
+let mensajeSalida = "";
+let mensajeGrosor = "";
+
+// a, b, c) Determinar el tamaño del vehículo
+    if (diametro > 1.4) {
+        mensajeSalida += "La rueda es para un vehículo grande.\n";
+    } else if (diametro > 0.8 && diametro <= 1.4) {
+        mensajeSalida += "La rueda es para un vehículo mediano.\n";
+    } else {
+        mensajeSalida += "La rueda es para un vehículo pequeño.\n";
+    }
+
+    // d) Comprobar el grosor recomendado
+    const condicionGrosorGrande = (diametro > 1.4 && grosor < 0.4);
+    const condicionGrosorMediano = (diametro > 0.8 && diametro <= 1.4 && grosor < 0.25);
+
+    if (condicionGrosorGrande || condicionGrosorMediano) {
+    mensajeGrosor = "El grosor para esta rueda es inferior al recomendado.";
+    }
+
+    // Mostrar el resultado
+    document.getElementById("resultado").innerText = mensajeSalida + mensajeGrosor;
+}
+//EJERCICIO 10
+function ejercicio_10(){
+const topping = solicitar("¿Qué topping desea? (Oreo, KitKat, Brownie) o 'sin topping'").toLowerCase();
+const precioBase = 50; // MXN
+let precioTopping = 0;
+let mensaje = "";
+
+    switch(topping) {
+        case 'oreo':
+            precioTopping = 10;
+            mensaje = `Topping elegido: Oreo. Precio total: ${precioBase + precioTopping} MXN.`;
+            break;
+        case 'kitkat':
+            precioTopping = 15;
+            mensaje = `Topping elegido: KitKat. Precio total: ${precioBase + precioTopping} MXN.`;
+            break;
+        case 'brownie':
+            precioTopping = 20;
+            mensaje = `Topping elegido: Brownie. Precio total: ${precioBase + precioTopping} MXN.`;
+            break;
+        case 'sin topping':
+            precioTopping = 0;
+            mensaje = `Ha elegido sin topping. Precio total: ${precioBase} MXN.`;
+            break;
+        default:
+            mensaje = `No tenemos el topping "${topping}", lo sentimos.`;
+            mensaje += `\nEl precio del helado sin ningún topping es de ${precioBase} MXN.`;
+            break;
+    }
+
+    document.getElementById("resultado").innerText = mensaje;
+}
+
+//EJERCICIO 11
+function ejercicio_11(){
+    const nivel = solicitar("Ingrese el nivel del programa (Course, Carrera o Master):").toLowerCase();
+    const becaNombre = solicitar("¿Cuenta con alguna beca? (Facebook, Google, Jesua) o 'ninguna':").toLowerCase();
+
+    let costoMensualBase = 0;
+    let duracionMeses = 0;
+    let becaDescuento = 0; // Porcentaje de descuento (0.0 a 1.0)
+    let nombrePrograma = "";
+    let mensaje = "";
+
+    // Definir costos y duración
+    switch(nivel) {
+        case 'course':
+            costoMensualBase = 4999;
+            duracionMeses = 2;
+            nombrePrograma = "Course";
+            break;
+        case 'carrera':
+            costoMensualBase = 3999;
+            duracionMeses = 6;
+            nombrePrograma = "Carrera";
+            break;
+        case 'master':
+            costoMensualBase = 2999;
+            duracionMeses = 12;
+            nombrePrograma = "Master";
+            break;
+        default:
+            mensaje = `Error: El programa "${nivel}" no es una opción válida.`;
+            document.getElementById("resultado").innerText = mensaje;
+            return;
+    }
+
+    // Definir descuento de beca
+    let nombreBeca = "Ninguna";
+    switch(becaNombre) {
+        case 'facebook':
+            becaDescuento = 0.20; // 20%
+            nombreBeca = "Facebook (20%)";
+            break;
+        case 'google':
+            becaDescuento = 0.15; // 15%
+            nombreBeca = "Google (15%)";
+            break;
+        case 'jesua':
+            becaDescuento = 0.50; // 50%
+            nombreBeca = "Jesua (50%)";
+            break;
+        case 'ninguna':
+            becaDescuento = 0;
+            nombreBeca = "Ninguna (0%)";
+            break;
+        default:
+            // Si ingresa una beca no válida, la tratamos como "ninguna" y advertimos.
+            mensaje += `\nAdvertencia: La beca "${becaNombre}" no se reconoce. No se aplicará descuento.`;
+            nombreBeca = "No Reconocida (0%)";
+            break;
+    }
+
+    // Cálculos
+    const descuentoAplicado = costoMensualBase * becaDescuento;
+    const costoMensualFinal = costoMensualBase - descuentoAplicado;
+    const costoTotal = costoMensualFinal * duracionMeses;
+
+    // Formateo de salida
+    mensaje = `Programa Seleccionado: ${nombrePrograma} (${duracionMeses} meses)\n`;
+    mensaje += `Costo Mensual Base: ${costoMensualBase.toFixed(2)} MXN\n`;
+    mensaje += `Beca Aplicada: ${nombreBeca}\n`;
+    mensaje += `-------------------------------------------------\n`;
+    mensaje += `Costo Mensual con Descuento: ${costoMensualFinal.toFixed(2)} MXN\n`;
+    mensaje += `Gasto Total por el Curso: ${costoTotal.toFixed(2)} MXN`;
+
+    document.getElementById("resultado").innerText = mensaje;
+}
+
+//EJERCICIO 12
+function identifyVehicle(){
+    let vehicle;
+    alert("Ingrese el tipo de vehiculo (coche, moto o autobus) ? Elige");
+    do{
+        vehicle = solicitar();
+    }while(!(vehicle === "coche" || vehicle === "moto" || vehicle === "autobus"));
+    return vehicle;
+}
+function definePrecio(typeVehicle){
+    let precioLitro;
+    switch(typeVehicle){
+        case "coche":{
+            precioLitro = 0.2;
+        } break;
+        case "moto":{
+            precioLitro = 0.1;
+        } break;
+        case "autobus":{
+            precioLitro = 0.5;
+        } break;
+    }
+    return precioLitro;
+}
+function solicitarLitros(){
+    let cantLitros;
+    do{
+    alert("Ingrese la cantidad de litros >= 0");
+    cantLitros = solicitar();
+    }while(cantLitros < 0); //La cantidad de litros no puede ser menor que cero
+    return cantLitros;
+}
+function calculator(cantLitros, priceXLitro){
+    let extra, totalPagar;
+    if(cantLitros>=0 && cantLitros<=100)
+        extra = 5;
+    else
+        extra = 10;
+    totalPagar = priceXLitro * cantLitros + extra
+
+    return totalPagar;
+    
+}
+let typeVehicle, priceXLitro, cantLitros, precioFinal;
+function ejercicio_12(){
+    typeVehicle = identifyVehicle();
+    priceXLitro = definePrecio(typeVehicle);
+    cantLitros = solicitarLitros()
+    precioFinal = calculator(cantLitros, priceXLitro);
+    document.getElementById("resultado").innerText = `El total a pagar es : ${precioFinal}`;
 }

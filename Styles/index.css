@@ -1,41 +1,77 @@
+/* --- Estilos Generales --- */
 body {
-    font-family: Arial, sans-serif;
-    background: #e3e6f0;
+    font-family: 'Arial', sans-serif;
+    background: #f0f4f8; /* Fondo suave para mejor contraste */
     padding: 20px;
+    margin: 0;
+    text-align: center; /* Centra el contenido general */
 }
 
 h1 {
-            text-align: center;
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
 }
 
+/* --- Estilo del Menú (Contenedor de Botones) --- */
 .menu {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 20px;
-    }
+    display: flex; /* Habilita Flexbox */
+    flex-wrap: wrap; /* ¡Clave! Permite que los elementos pasen a la siguiente línea */
+    justify-content: center; /* Centra los botones horizontalmente */
+    max-width: 1000px; /* Limita el ancho del menú para que no se extienda demasiado en escritorio */
+    margin: 0 auto 30px auto; /* Centra el bloque de menú */
+    gap: 12px; /* Espacio entre los botones */
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
 
+/* --- Estilo de Botón General --- */
 button {
-    padding: 10px 20px;
+    flex-grow: 1; /* Permite que los botones crezcan si hay espacio */
+    min-width: 120px; /* Ancho mínimo para que no se vean muy pequeños */
+    max-width: 180px; /* Ancho máximo para mantener la consistencia */
+    padding: 12px 20px;
     border: none;
-    background-color: #007bff;
+    background-color: #007bff; /* Azul primario */
     color: white;
     border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
-    transition: 0.3s;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.1s;
 }
 
 button:hover {
     background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
+
+/* Estilo específico para el botón "Limpiar" */
+.limpiar-btn {
+    background-color: #1e97e8; /* Rojo para destacar la acción */
+    max-width: 100%; /* Ocupa todo el ancho disponible */
+    margin-top: 10px;
+    flex-basis: 100%; /* Fuerza a que ocupe una línea completa */
+}
+
+.limpiar-btn:hover {
+    background-color: #15c880;
+}
+
+/* --- Estilo del Área de Resultados --- */
 #resultado {
-    width: 60%;
-    margin: auto;
+    max-width: 800px;
+    margin: 20px auto;
     background: white;
-    padding: 20px;
-    border-radius: 10px;
-    min-height: 80px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    padding: 25px;
+    border-radius: 12px;
+    min-height: 100px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
     font-size: 18px;
+    text-align: left;
+    white-space: pre-line; /* Respeta saltos de línea (\n) del JS */
+    border-left: 5px solid #007bff;
 }

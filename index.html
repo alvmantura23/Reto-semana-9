@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Semana 9</title>
+    <title>Menú de Ejercicios - Modular</title>
+    <!-- Enlace al archivo CSS en la carpeta Styles -->
     <link rel="stylesheet" href="./Styles/index.css">
 </head>
 <body>
 
-    <h1>Menú de Ejercicios</h1>
+    <h1>Menú de Ejercicios Semana 9</h1>
 
+    <!-- Contenedor con Flexbox para que los botones se envuelvan -->
     <div class="menu">
         <button onclick="ejercicio_1()">Ejercicio 1</button>
         <button onclick="ejercicio_2()">Ejercicio 2</button>
@@ -17,15 +19,20 @@
         <button onclick="ejercicio_4()">Ejercicio 4</button>
         <button onclick="ejercicio_5()">Ejercicio 5</button>
         <button onclick="ejercicio_6()">Ejercicio 6</button>
-        <!-- Aquí puedes poner más botones luego -->
-
-        <button onclick="limpiar()">Limpiar</button>
+        <button onclick="ejercicio_7()">Ejercicio 7</button>
+        <button onclick="ejercicio_8()">Ejercicio 8</button>
+        <button onclick="ejercicio_9()">Ejercicio 9</button>
+        <button onclick="ejercicio_10()">Ejercicio 10</button>
+        <button onclick="ejercicio_11()">Ejercicio 11</button>
+        <button onclick="ejercicio_12()">Ejercicio 12</button>
+        
+        <button onclick="limpiar()" class="limpiar-btn">Limpiar Resultados</button>
     </div>
-    <div id="resultado"></div> <!--Dentro del div se va a mostrar el resultado-->
 
+    <!-- Área de resultados -->
+    <div id="resultado"></div>
     
-
-
+    <!-- Enlace al archivo JavaScript en la carpeta Scripts -->
     <script src="./Scripts/index.js"></script>
 </body>
 </html>
